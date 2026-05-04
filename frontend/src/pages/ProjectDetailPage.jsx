@@ -144,7 +144,7 @@ function AddMemberModal({ projectId, onClose, onAdd }) {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label">User ID</label>
-            <input className="form-input" placeholder="Paste user's MongoDB ID" value={userId}
+            <input className="form-input" placeholder="paste userID" value={userId}
               onChange={(e) => setUserId(e.target.value)} required />
             <div className="form-error" style={{ color: "var(--text-muted)", marginTop: 6 }}>
               Ask the user to share their Account ID from their profile.
