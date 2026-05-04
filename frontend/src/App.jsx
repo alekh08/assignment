@@ -23,7 +23,12 @@ function AppLayout({ children }) {
   return (
     <div className="app-layout">
       <Sidebar />
-      <main className="main-content">{children}</main>
+      <main className="main-content" style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ flex: 1 }}>{children}</div>
+        <footer style={{ textAlign: "center", padding: "20px", color: "var(--text-muted)", fontSize: "14px", borderTop: "1px solid var(--border)", marginTop: "auto" }}>
+          🚀 Made By Alekh Sachan
+        </footer>
+      </main>
     </div>
   );
 }
