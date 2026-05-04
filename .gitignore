@@ -1,0 +1,30 @@
+# Environments
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+dist/
+build/
+.npm
+package-lock.json
+
+# Python
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
+*.log
