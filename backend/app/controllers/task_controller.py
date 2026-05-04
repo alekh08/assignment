@@ -96,6 +96,27 @@ async def get_tasks(
     return [_task_to_dict(t) for t in tasks]
 
 
+async def get_overdue_tasks(current_user: User) -> List[dict]:
+    all_projects = await Project.find_all().to_list()
+    user_projects = [
+        p for p in all_projects
+        if any(str(m.user_id) == str(current_user.id) for m in p.members)
+    ]
+    project_ids = [p.id for p in user_projects]
+
+    all_tasks = []
+    for pid in project_ids:
+        tasks = await Task.find(Task.project_id == pid).to_list()
+        all_tasks.extend(tasks)
+
+    now = datetime.utcnow()
+    overdue = [
+        t for t in all_tasks
+        if t.due_date and t.due_date.replace(tzinfo=None) < now and t.status != TaskStatus.done
+    ]
+    return [_task_to_dict(t) for t in overdue]
+
+
 async def update_task(task_id: str, data: TaskUpdate, current_user: User) -> dict:
     task = await Task.get(PydanticObjectId(task_id))
     if not task:

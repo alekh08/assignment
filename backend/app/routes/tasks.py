@@ -12,6 +12,11 @@ async def create_task(data: TaskCreate, current_user: User = Depends(get_current
     return await task_controller.create_task(data, current_user)
 
 
+@router.get("/overdue")
+async def get_overdue_tasks(current_user: User = Depends(get_current_user)):
+    return await task_controller.get_overdue_tasks(current_user)
+
+
 @router.get("")
 async def get_tasks(
     project_id: str = Query(..., description="Filter tasks by project ID"),
