@@ -5,6 +5,7 @@ from typing import Optional
 class SignupRequest(BaseModel):
     name: str
     email: EmailStr
+    member_id: str
     password: str
 
     class Config:
@@ -31,3 +32,4 @@ class UserResponse(BaseModel):
     id: str
     name: str
     email: str
+    member_id: str

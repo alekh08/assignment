@@ -13,9 +13,17 @@ async def signup(data: SignupRequest):
             detail="Email already registered",
         )
 
+    existing_member = await User.find_one(User.member_id == data.member_id)
+    if existing_member:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Member ID already taken",
+        )
+
     user = User(
         name=data.name,
         email=data.email,
+        member_id=data.member_id,
         hashed_password=hash_password(data.password),
     )
     await user.insert()
@@ -24,7 +32,7 @@ async def signup(data: SignupRequest):
     return {
         "access_token": token,
         "token_type": "bearer",
-        "user": {"id": str(user.id), "name": user.name, "email": user.email},
+        "user": {"id": str(user.id), "name": user.name, "email": user.email, "member_id": user.member_id},
     }
 
 
@@ -40,5 +48,5 @@ async def login(data: LoginRequest):
     return {
         "access_token": token,
         "token_type": "bearer",
-        "user": {"id": str(user.id), "name": user.name, "email": user.email},
+        "user": {"id": str(user.id), "name": user.name, "email": user.email, "member_id": user.member_id},
     }

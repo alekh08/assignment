@@ -61,9 +61,9 @@ async def add_member(project_id: str, data: MemberAction, current_user: User) ->
     if not _is_admin(project, current_user.id):
         raise HTTPException(status_code=403, detail="Only admins can add members")
 
-    target_user = await User.get(PydanticObjectId(data.user_id))
+    target_user = await User.find_one(User.member_id == data.user_id)
     if not target_user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="User not found with this Member ID")
 
     if _get_member(project, target_user.id):
         raise HTTPException(status_code=400, detail="User is already a member")

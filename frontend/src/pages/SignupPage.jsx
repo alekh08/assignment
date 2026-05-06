@@ -5,7 +5,7 @@ import { authService } from "../services/services";
 import toast from "react-hot-toast";
 
 export default function SignupPage() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ name: "", email: "", member_id: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { login } = useAuth();
@@ -65,6 +65,19 @@ export default function SignupPage() {
               placeholder="you@example.com"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Unique Member ID</label>
+            <input
+              id="signup-memberid"
+              type="text"
+              className="form-input"
+              placeholder="e.g. alekh08"
+              value={form.member_id}
+              onChange={(e) => setForm({ ...form, member_id: e.target.value })}
               required
             />
           </div>
