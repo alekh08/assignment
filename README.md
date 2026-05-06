@@ -7,7 +7,7 @@ A full-stack collaborative task management system with role-based access control
 ## 🏗️ Project Structure
 
 ```
-CRUD-operations/
+assignment/
 ├── backend/
 │   ├── app/
 │   │   ├── controllers/        # Business logic
