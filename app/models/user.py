@@ -1,4 +1,4 @@
-from beanie import Document, Indexed
+from beanie import Document
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 from datetime import datetime
@@ -6,8 +6,8 @@ from datetime import datetime
 
 class User(Document):
     name: str
-    email: Indexed(EmailStr, unique=True)
-    member_id: Indexed(str, unique=True)
+    email: EmailStr
+    member_id: str
     hashed_password: str
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
